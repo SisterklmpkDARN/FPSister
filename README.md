@@ -9,6 +9,11 @@ Rahmat Daniyanto (5111100149)
 ========================================
 Final Project Sister - Klasifikasi data kddcup '99 dengan Sistem Terdistribusi
 
+Persyaratan:
+dispy
+scipy
+numpy
+
 Referensi:
 http://kdd.ics.uci.edu/databases/kddcup99/
  1. kddcup.newtestdata_10_percent_unlabeled.gz
