@@ -20,8 +20,7 @@ if __name__ == '__main__':
     import numpy as np
     print 'DEBUG: Creating Job Cluster'
     cluster = dispy.JobCluster(compute)
-    jobs = []
-    jobs = np.array(jobs)
+    jobs = np.array([])
     print 'DEBUG: Reading data'
     # load data centroid dengan pickle
     fp = open('centroids_np','r')
@@ -34,12 +33,9 @@ if __name__ == '__main__':
     n = 0
     print 'DEBUG: Distributing jobs'
     for i,line in enumerate(fp):
-        if i == 2:
-            break
         line = line.strip()
         temp = line.split(',')
-        lis = []
-        lis = np.array(lis)
+        lis = np.array([])
         for val in temp:
             lis = np.append(lis, float(val))
         print 'DEBUG: Submit job',n+1
@@ -49,16 +45,16 @@ if __name__ == '__main__':
         n += 1
 
     np.set_printoptions(precision=3)
-    hasil = []
-    hasil = np.array(hasil)
+    hasil = np.array([])
     
     for job in jobs:
         res = job()
-        hasil = hasil.tolist()
-        hasil.append(res.tolist())
+        if hasil.size == 0:
+            hasil = np.append(hasil, res)
+        else:
+            hasil = np.vstack((hasil,res))
         print '%s executed job %s at %s with %s' % (job.ip_addr, job.id, job.start_time, n)
         #hasil = np.append(hasil, res)
-        hasil = np.array(hasil)
 
     print hasil
     print 'DEBUG: Writing to file'
